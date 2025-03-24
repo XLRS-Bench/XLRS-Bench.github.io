@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> XLRS-Bench </title>
+  <!-- <link rel="icon" href="./static/images/logo.png"> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/video-player.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>  
+  <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script>
+
+  <style>
+    .no-sort {
+        cursor: default;
+        pointer-events: none;
+        background-image: none !important; /* Remove the sort arrow */
+    }
+  </style>
+
+</head>
+<body>
+
+  
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/VITA-MLLM/VITA">
+            <b>VITA</b> 
+          </a>
+          <a class="navbar-item" href="https://github.com/yfzhang114/SliME">
+            <b>SliME</b> 
+          </a>
+          <a class="navbar-item" href="https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models">
+            <b>MME</b> 
+          </a>
+          <a class="navbar-item" href="https://github.com/BradyFU/Video-MME">
+            <b>Video-MME</b> 
+          </a>
+          <a class="navbar-item" href="https://github.com/yfzhang114/MME-RealWorld">
+            <b>MME-RealWorld</b> 
+          </a>    
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+            <!-- <img src="static/images/logo.png" style="width:1.8em;vertical-align: middle" alt="Logo"/> -->
+            <span class="XLRS-Bench" style="vertical-align: middle;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)">XLRS-Bench</span>
+            </h1>
+          <h2 class="subtitle is-3 publication-subtitle ", style="width: 100%;margin-bottom: 20px;">
+            <strong>Could Your Multimodal LLMs Understand Extremely Large
+              Ultra-High-Resolution Remote Sensing Imagery?</strong>
+          </h2>
+          
+          <div class="is-size-5 publication-authors", style="width: 100%; margin: 15px auto;", >
+            <span class="author-block">Fengxiang Wang<sup style="color:#18acfb;">1</sup> ,</span>
+            <!-- <sup>,</sup><sup style="color:#1a4ebf">5</sup> -->
+            <span class="author-block">Hongzhen Wang<sup style="color:#9400D3">2</sup>,</span>
+            <span class="author-block">Zonghao Guo<sup style="color:#9400D3">2</sup>,</span>
+
+            <span class="author-block">Di Wang<sup style="color:#ed4b82">3</sup><sup>,</sup><sup style="color:#1a4ebf">5</sup>,</span>
+
+            <span class="author-block">Yulin Wang<sup style="color:#9400D3">2</sup>,</span>
+            <span class="author-block">Mingshuo Chen<sup style="color:#ffac33">4</sup>,</span>
+            <span class="author-block">Qiang Ma<sup style="color:#9400D3">2</sup>,</span>
+            <span class="author-block">Long Lan<sup style="color:#18acfb;">1</sup> ,</span>
+            <span class="author-block">Wenjing Yang<sup style="color:#18acfb;">1</sup><sup>*</sup> ,</span>
+            <span class="author-block">Jing Zhang<sup style="color:#ed4b82">3</sup><sup>,</sup><sup style="color:#6fbf73">6</sup>,</span>
+            <span class="author-block">Zhiyuan Liu<sup style="color:#9400D3">2</sup>,</span>
+            <span class="author-block">Maosong Sun<sup style="color:#9400D3">2</sup></span>
+
+
+            <br><span class="author-block", style="font-size:25px;text-shadow: 2px 2px 4px rgba(67, 113, 232, 0.5)"><a href="https://github.com/nanocm/XLRS">XLRS-Bench Team</a></span></br>
+
+        </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup style="color:#53bcf5">1</sup>College of Computer Science and Technology, National University of Defense Technology,</span>
+            <span class="author-block"><sup style="color:#9400D3">2</sup>Tsinghua University,</span>
+            <span class="author-block"><sup style="color:#ed4b82">3</sup>School of Computer Science, Wuhan University,</span>
+            <span class="author-block"><sup style="color:#ffac33">4</sup>Beijing University of Posts and Telecommunications,</span>
+            <span class="author-block"><sup style="color:#1a4ebf">5</sup>Zhongguancun Academy,</span>
+            <span class="author-block"><sup style="color:#6fbf73">6</sup>School of Artificial Intelligence, Wuhan University</span><br>
+            <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/25xx.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                <!-- <a href="https://lupantech.github.io/papers/arxiv23_mathvista.pdf"
+                   class="external-link button is-normal is-rounded is-dark"> -->
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/nanocm/XLRS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/initiacms/XLRS-Bench"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="far fa-huggingface"></i> -->
+                      <p style="font-size:18px">🤗</p>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span> 
+              <!-- Leaderboard Link. -->
+              <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🏆</p>
+                  </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-top: -5%;">Introduction</h2>
+        <div class="content has-text-justified">
+          &nbsp;&nbsp;&nbsp;Remote sensing (RS) images have become essential for
+          monitoring and understanding human environments, driving advancements in applications like precision agriculture, urban planning, and disaster assessment. While recent studies have proposed benchmarks and metrics to assess MLLM performance in RS, these efforts remain limited in three key areas:
+          1) limited image size compared to real ;
+          2) reliance on model-based annotations results in restricted data quality;
+          3) insufficient task difficulty, especially caused by the limited image resolution.<br>
+          
+          &nbsp;&nbsp;&nbsp;We present XLRS-Bench, <strong> a comprehensive benchmark for evaluating the perception and reasoning capabilities of MLLMs in ultra-high-resolution RS scenarios,</strong> 
+
+          featuring  the largest average image size of <strong>8,500 × 8,500</strong>  observed thus far.
+           Our dataset encompasses <strong>45,942 annotations across 16 tasks</strong>, all expertly curated by a team of 45 experts. 
+           The main advantages of XLRS-Bench compared to existing MLLM benchmarks as follows:<br>
+
+
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;1. Ultra-high Resolution.</strong> XLRS-Bench features the largest image sizes available, <strong>10∼20×</strong> than that of existing datasets, with 840 images out of all images at a resolution of <strong>10,000×10,000</strong> pixels<br> 
+            <strong>&nbsp;&nbsp;&nbsp;2. High-quality Annotation.</strong> All the annotations are human involved and manually verified through iterations, resulting in a high-quality benchmark for evaluating MLLMs on real ultra-high-resolution RS scenarios.<br>
+            <strong>&nbsp;&nbsp;&nbsp;3. Comprehensive Evaluation Dimensions:</strong> XLRS-Bench covers 10 perception indicators and 6 reasoning dimensions to assess MLLMs’ capabilities, encompassing <strong>16 sub-tasks with a total of 45,942</strong> questions. Especially, XLRS-Bench includes complex reasoning tasks to explore MLLMs’ potential in conducting planning and change detection in long spatial-temporal RS scenarios.<br>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    updateRowNumbers();
+    document.querySelector(".results").addEventListener("click", updateRowNumbers);
+  });
+
+  function updateRowNumbers() {
+    const rows = document.querySelectorAll(".results tbody tr");
+    rows.forEach((row, index) => {
+      row.querySelector("td").innerText = index + 1;
+    });
+  }
+</script>
+<!-- <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script> -->
+
+<section class="section">
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+
+        <h2 class="title is-3" id="leaderboard" style="margin-top: -5%;">Leaderboard</h2>
+        <div class="content">
+          <p class="mt-3">Models are ranked according to their average performance on perception and reasoning tasks, from highest to lowest. 
+            <strong>"Counting", "Scene Classification", and so on </strong> each indicate a specific L2 sub-task respectively. 
+            <strong>“Avg”</strong> indicate the weighted average accuracy across all L2 sub-tasks in each domain. By default, this leaderboard is sorted by results with <strong>Overall</strong>. To view other sorted results, please click on the corresponding cell.
+          </p>
+          <p class="mt-3"> Results on <strong>English VQA</strong> benchmark.</p>
+          <table class="js-sort-table results "  style="margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th rowspan="2" class="no-sort" style="width: 30px;"><strong>#</strong></th>
+                <th rowspan="1" class="no-sort" style="width: 215px;"><strong>Method</strong></th>
+                <th rowspan="1" style="width: 50px;"><strong>Lang</strong></th>
+            
+                <th colspan="4"><strong>Perception</strong></th>
+                <th colspan="4"><strong>Reasoning</strong></th>
+                <th rowspan="2"><strong>Avg</strong></th>
+              </tr>
+              <tr>
+                <th colspan="2" class="no-sort"><strong>Task Split</strong></th>
+                <th data-js-sort-colNum="3"><strong>Counting</strong></th>
+                <th data-js-sort-colNum="4"><strong>Scene Classification</strong></th>
+                <th data-js-sort-colNum="5"><strong>Object Spatial Relationship</strong></th>
+                <th data-js-sort-colNum="6"><strong>Object Properties</strong></th>
+            
+                <th data-js-sort-colNum="7"><strong>Complex Reasoning</strong></th>
+                <th data-js-sort-colNum="8"><strong>Planning</strong></th>
+                <th data-js-sort-colNum="9"><strong>Spatiotemporal Reasoning</strong></th>
+                <th data-js-sort-colNum="10"><strong>Anomaly Reasoning</strong></th>
+              </tr>
+            </thead>
+            
+            
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>CogVLM2<br><span style="font-size: 12px;">Llama3-8B</span></b></td>
+                <td>en</td>
+                <td><strong>36.66</strong></td><td>46.26</td><td><strong>35.92</strong></td><td><strong>36.89</strong></td>
+                <td>60.23</td><td>34.16</td><td>-</td><td>69.85</td><td><strong>39.80</strong></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>Qwen2-VL<br><span style="font-size: 12px;;">Qwen2-7B</span></b></td>
+                <td>en</td>
+                <td><strong>39.72</strong></td><td>48.30</td><td>32.04</td><td>35.07</td>
+                <td>64.23</td><td>32.12</td><td><strong>45.93</strong></td><td>68.35</td><td>38.99</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-OneVision<br><span style="font-size: 12px; ">Qwen2-7B</span></b></td>
+                <td>en</td>
+                <td>35.84</td><td>47.76</td><td>32.60</td><td>35.95</td>
+                <td>60.37</td><td>24.07</td><td>37.78</td><td>71.88</td><td>38.90</td>
+              </tr>
+              <tr >
+                <td>4</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GPT-4o-mini<br><span style="font-size: 12px; ">Proprietary</span></b></td>
+                <td>en</td>
+                <td>28.32</td><td>45.46</td><td>29.96</td><td>36.29</td>
+                <td>54.84</td><td>33.81</td><td>15.19</td><td>72.06</td><td>37.99</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>InternVL2<br><span style="font-size: 12px;">InternLM2.5-7B</span></b></td>
+                <td>en</td>
+                <td>33.91</td><td>44.93</td><td>26.60</td><td>34.84</td>
+                <td><strong>66.43</strong></td><td>33.01</td><td>44.44</td><td><strong>74.54</strong></td><td>37.89</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>InternLM-XComposer-2.5<br><span style="font-size: 12px;">InternLM2-7B</span></b></td>
+                <td>en</td>
+                <td>35.84</td><td>47.43</td><td>32.75</td><td>30.60</td>
+                <td>64.76</td><td>35.31</td><td>32.22</td><td>69.50</td><td>36.33</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-Next<br><span style="font-size: 12px;">Llama3-8B</span></b></td>
+                <td>en</td>
+                <td>38.00</td><td>40.79</td><td>32.50</td><td>31.22</td>
+                <td>61.85</td><td>26.02</td><td>32.22</td><td>69.10</td><td>35.65</td>
+              </tr>
+              <tr >
+                <td>8</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GPT-4o<br><span style="font-size: 12px; ">Proprietary</span></b></td>
+                <td>en</td>
+                <td>29.51</td><td><strong>48.55</strong></td><td>32.35</td><td>24.78</td>
+                <td>52.60</td><td><strong>41.24</strong></td><td>21.85</td><td>72.06</td><td>32.15</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-1.5<br><span style="font-size: 12px;">Vicuna-7B</span></b></td>
+                <td>en</td>
+                <td>22.65</td><td>19.69</td><td>23.05</td><td>20.21</td>
+                <td>33.86</td><td>38.67</td><td>29.26</td><td>34.70</td><td>22.81</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GeoChat<br><span style="font-size: 12px;">Vicuna-7B</span></b></td>
+                <td>en</td>
+                <td>22.65</td><td>18.96</td><td>23.30</td><td>20.21</td>
+                <td>30.33</td><td>32.23</td><td>-</td><td>33.25</td><td>22.03</td>
+              </tr>
+            </tbody>
+                                                             
+        </table> 
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <div class="content">
+
+          <p class="mt-3"> Results on <strong>Chinese VQA</strong> benchmark.</p>
+          </div>
+
+          <table class="js-sort-table results"  style="margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th rowspan="2" class="no-sort" style="width: 30px;"><strong>#</strong></th>
+                <th rowspan="1" class="no-sort" style="width: 215px;"><strong>Method</strong></th>
+                <th rowspan="1" style="width: 50px;"><strong>Lang</strong></th>
+            
+                <th colspan="4"><strong>Perception</strong></th>
+                <th colspan="4"><strong>Reasoning</strong></th>
+                <th rowspan="2"><strong>Avg</strong></th>
+              </tr>
+              <tr>
+                <th colspan="2" class="no-sort"><strong>Task Split</strong></th>
+                <th data-js-sort-colNum="3"><strong>Counting</strong></th>
+                <th data-js-sort-colNum="4"><strong>Scene Classification</strong></th>
+                <th data-js-sort-colNum="5"><strong>Object Spatial Relationship</strong></th>
+                <th data-js-sort-colNum="6"><strong>Object Properties</strong></th>
+            
+                <th data-js-sort-colNum="7"><strong>Complex Reasoning</strong></th>
+                <th data-js-sort-colNum="8"><strong>Planning</strong></th>
+                <th data-js-sort-colNum="9"><strong>Spatiotemporal Reasoning</strong></th>
+                <th data-js-sort-colNum="10"><strong>Anomaly Reasoning</strong></th>
+              </tr>
+            </thead>
+            
+            
+            <tbody>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>Qwen2-VL<br><span style="font-size: 12px;">Qwen2-7B</span></b></td>
+                <td>zh</td>
+                <td><strong>39.49</strong></td><td><strong>49.28</strong></td><td>33.26</td><td><strong>37.89</strong></td>
+                <td>67.62</td><td>24.34</td><td><strong>44.44</strong></td><td><strong>76.57</strong></td><td><strong>41.10</strong></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>InternVL2<br><span style="font-size: 12px;">InternLM2.5-7B</span></b></td>
+                <td>zh</td>
+                <td>34.42</td><td>39.12</td><td>34.24</td><td>37.54</td>
+                <td><strong>68.57</strong></td><td>40.09</td><td>44.07</td><td>76.57</td><td>40.58</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-OneVision<br><span style="font-size: 12px; ">Qwen2-7B</span></b></td>
+                <td>zh</td>
+                <td>37.48</td><td>47.06</td><td>31.73</td><td>34.72</td>
+                <td>62.56</td><td>29.12</td><td>30.37</td><td>74.80</td><td>38.42</td>
+              </tr>
+              <tr >
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GPT-4o-mini<br><span style="font-size: 12px; ">Proprietary</span></b></td>
+                <td>zh</td>
+                <td>29.51</td><td>44.13</td><td>29.59</td><td>35.41</td>
+                <td>55.36</td><td><strong>41.86</strong></td><td>21.85</td><td>74.71</td><td>37.82</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>InternLM-XComposer-2.5<br><span style="font-size: 12px; ">InternLM2-7B</span></b></td>
+                <td>zh</td>
+                <td>37.70</td><td>43.15</td><td>32.62</td><td>33.40</td>
+                <td>62.99</td><td>29.47</td><td>24.44</td><td>69.14</td><td>37.26</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>CogVLM2<br><span style="font-size: 12px; ">Llama3-8B</span></b></td>
+                <td>zh</td>
+                <td>36.21</td><td>45.79</td><td><strong>34.57</strong></td><td>31.03</td>
+                <td>59.56</td><td>26.19</td><td>-</td><td>70.47</td><td>35.84</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-Next<br><span style="font-size: 12px; ">Llama3-8B</span></b></td>
+                <td>zh</td>
+                <td>33.08</td><td>39.52</td><td>31.98</td><td>29.34</td>
+                <td>54.07</td><td>21.59</td><td>25.56</td><td>69.85</td><td>33.48</td>
+              </tr>
+              <tr >
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GPT-4o<br><span style="font-size: 12px; ">Proprietary</span></b></td>
+                <td>zh</td>
+                <td>22.28</td><td>45.47</td><td>31.25</td><td>24.93</td>
+                <td>45.45</td><td>27.08</td><td>15.19</td><td>69.41</td><td>30.40</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>LLaVA-1.5<br><span style="font-size: 12px; ">Vicuna-7B</span></b></td>
+                <td>zh</td>
+                <td>22.65</td><td>19.07</td><td>23.01</td><td>20.21</td>
+                <td>33.95</td><td>38.67</td><td>29.26</td><td>37.58</td><td>22.86</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style="text-align: left; padding: 2px 10px;"><b>GeoChat<br><span style="font-size: 12px; ">Vicuna-7B</span></b></td>
+                <td>zh</td>
+                <td>22.65</td><td>19.17</td><td>23.05</td><td>20.21</td>
+                <td>24.75</td><td>22.79</td><td>-</td><td>23.74</td><td>20.99</td>
+              </tr>
+            </tbody>
+            
+                                                             
+        </table> 
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered content">
+          <div class="content">
+  
+            <p class="mt-3"> Results on <strong>English Captioning</strong> benchmark.</p>
+            </div>
+  
+            <table class="js-sort-table results" id="cap_results_en" style="margin-left: auto; margin-right: auto; border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th rowspan="1" class="no-sort" style="width: 30px;"><strong>#</strong></th>
+                  <th style="width: 200px;" class="no-sort"><strong>Method</strong></th>
+                  <th style="width: 50px;" class="no-sort"><strong>Language</strong></th>
+                  <th data-js-sort-colNum="3"><strong>BLEU-1</strong></th>
+                  <th data-js-sort-colNum="4"><strong>BLEU-2</strong></th>
+                  <th data-js-sort-colNum="5"><strong>BLEU-3</strong></th>
+                  <th data-js-sort-colNum="6"><strong>BLEU-4</strong></th>
+                  <th data-js-sort-colNum="7"><strong>METEOR</strong></th>
+                  <th data-js-sort-colNum="8"><strong>ROUGE_L</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>GeoChat</td>
+                  <td>en</td>
+                  <td>16.74</td>
+                  <td>8.38</td>
+                  <td>4.49</td>
+                  <td>2.45</td>
+                  <td>10.37</td>
+                  <td>16.72</td>
+                </tr>
+                <tr >
+                  <td></td>
+                  <td>GPT-4o</td>
+                  <td>en</td>
+                  <td>34.69</td>
+                  <td>17.67</td>
+                  <td>8.56</td>
+                  <td>4.04</td>
+                  <td>23.54</td>
+                  <td>20.93</td>
+                </tr>
+                <tr >
+                  <td></td>
+                  <td>GPT-4o-mini</td>
+                  <td>en</td>
+                  <td>38.29</td>
+                  <td>19.75</td>
+                  <td>9.76</td>
+                  <td>4.29</td>
+                  <td><strong>23.94</strong></td>
+                  <td><strong>21.30</strong></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>Qwen2-VL</td>
+                  <td>en</td>
+                  <td>26.74</td>
+                  <td>12.79</td>
+                  <td>5.99</td>
+                  <td>2.53</td>
+                  <td>19.32</td>
+                  <td>19.76</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>LLaVA-OneVision</td>
+                  <td>en</td>
+                  <td><strong>41.12</strong></td>
+                  <td><strong>20.42</strong></td>
+                  <td><strong>9.94</strong></td>
+                  <td><strong>4.56</strong></td>
+                  <td>19.99</td>
+                  <td>21.03</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>LLaVA-Next</td>
+                  <td>en</td>
+                  <td>27.62</td>
+                  <td>13.45</td>
+                  <td>6.82</td>
+                  <td>3.52</td>
+                  <td>17.78</td>
+                  <td>20.65</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>LLaVA-1.5</td>
+                  <td>en</td>
+                  <td>35.82</td>
+                  <td>17.62</td>
+                  <td>8.92</td>
+                  <td>4.33</td>
+                  <td>16.49</td>
+                  <td>20.80</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>CogVLM2</td>
+                  <td>en</td>
+                  <td>30.27</td>
+                  <td>14.46</td>
+                  <td>6.80</td>
+                  <td>3.09</td>
+                  <td>19.37</td>
+                  <td>19.17</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>InternLM-XComposer-2.5</td>
+                  <td>en</td>
+                  <td>35.17</td>
+                  <td>15.91</td>
+                  <td>7.00</td>
+                  <td>3.02</td>
+                  <td>19.99</td>
+                  <td>17.95</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>InternVL2</td>
+                  <td>en</td>
+                  <td>25.71</td>
+                  <td>12.44</td>
+                  <td>5.84</td>
+                  <td>2.58</td>
+                  <td>19.55</td>
+                  <td>19.43</td>
+                </tr>
+              </tbody>
+            </table>
+            
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+    
+        <div class="columns is-centered">
+          <div class="column is-full has-text-centered content">
+            <div class="content">
+    
+              <p class="mt-3"> Results on <strong>Chinese Captioning</strong> benchmark.</p>
+              </div>
+              <table class="js-sort-table results" id="cap_results_zh" style="margin-left: auto; margin-right: auto; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                  <tr>
+                  <th rowspan="1" class="no-sort" style="width: 30px;"><strong>#</strong></th>
+                  <th style="width: 200px;" class="no-sort"><strong>Method</strong></th>
+                    <th style="width: 50px;" class="no-sort"><strong>Language</strong></th>
+                    <th data-js-sort-colNum="3"><strong>BLEU-1</strong></th>
+                    <th data-js-sort-colNum="4"><strong>BLEU-2</strong></th>
+                    <th data-js-sort-colNum="5"><strong>BLEU-3</strong></th>
+                    <th data-js-sort-colNum="6"><strong>BLEU-4</strong></th>
+                    <th data-js-sort-colNum="7"><strong>METEOR</strong></th>
+                    <th data-js-sort-colNum="8"><strong>ROUGE_L</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <td></td>
+                  <td>GeoChat</td>
+                    <td>zh</td>
+                    <td>6.77</td>
+                    <td>1.49</td>
+                    <td>0.68</td>
+                    <td>0.26</td>
+                    <td>7.84</td>
+                    <td>15.79</td>
+                  </tr>
+                  <tr >
+                  <td></td>
+                  <td>GPT-4o</td>
+                    <td>zh</td>
+                    <td>31.08</td>
+                    <td>3.86</td>
+                    <td>1.43</td>
+                    <td>0.43</td>
+                    <td><strong>26.41</strong></td>
+                    <td>36.41</td>
+                  </tr>
+                  <tr >
+                  <td></td>
+                  <td>GPT-4o-mini</td>
+                    <td>zh</td>
+                    <td>34.13</td>
+                    <td>5.37</td>
+                    <td>2.20</td>
+                    <td>0.58</td>
+                    <td>25.73</td>
+                    <td><strong>37.11</strong></td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>Qwen2-VL</td>
+                    <td>zh</td>
+                    <td>21.80</td>
+                    <td>3.50</td>
+                    <td>1.41</td>
+                    <td>0.33</td>
+                    <td>22.92</td>
+                    <td>31.04</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>LLaVA-OneVision</td>
+                    <td>zh</td>
+                    <td>33.05</td>
+                    <td>5.67</td>
+                    <td><strong>2.47</strong></td>
+                    <td><strong>0.98</strong></td>
+                    <td>20.24</td>
+                    <td>31.95</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>LLaVA-Next</td>
+                    <td>zh</td>
+                    <td>13.01</td>
+                    <td>2.10</td>
+                    <td>0.82</td>
+                    <td>0.20</td>
+                    <td>15.12</td>
+                    <td>27.72</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>LLaVA-1.5</td>
+                    <td>zh</td>
+                    <td>28.56</td>
+                    <td>4.26</td>
+                    <td>1.73</td>
+                    <td>0.00</td>
+                    <td>16.36</td>
+                    <td>29.18</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>CogVLM2</td>
+                    <td>zh</td>
+                    <td>19.78</td>
+                    <td>2.23</td>
+                    <td>0.79</td>
+                    <td>0.18</td>
+                    <td>22.53</td>
+                    <td>28.33</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>InternLM-XComposer-2.5</td>
+                    <td>zh</td>
+                    <td><strong>37.30</strong></td>
+                    <td><strong>6.12</strong></td>
+                    <td>2.39</td>
+                    <td>0.58</td>
+                    <td>20.86</td>
+                    <td>32.97</td>
+                  </tr>
+                  <tr>
+                  <td></td>
+                  <td>InternVL2</td>
+                    <td>zh</td>
+                    <td>16.49</td>
+                    <td>3.16</td>
+                    <td>1.39</td>
+                    <td>0.48</td>
+                    <td>22.10</td>
+                    <td>25.76</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container">
+    
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+              <div class="content">
+      
+                <p class="mt-3"> Results on <strong>Visual Grounding</strong> benchmark.</p>
+                </div>
+    
+                
+                <table class="js-sort-table results" id="visual_grounding_results" style="margin-left: auto; margin-right: auto; border-collapse: collapse; margin-top: 20px;">
+                  <thead>
+                    <tr>
+                      <!-- 行号列，用于排序时显示独立编号 -->
+                      <th rowspan="2" class="no-sort" style="width: 30px;"><strong>#</strong></th>
+                      <!-- Benchmark 与 Method 分开显示 -->
+                      <th rowspan="2" style="width: 200px;" class="no-sort"><strong>Benchmark</strong></th>
+                      <th rowspan="2" style="width: 200px;" class="no-sort"><strong>Method</strong></th>
+                      <!-- 后面9个列为各方法性能 -->
+                      <th colspan="10"><strong>Performance</strong></th>
+                    </tr>
+                    <tr>
+                      <th data-js-sort-colNum="3"><strong>GPT-4o</strong></th>
+                      <th data-js-sort-colNum="4"><strong>GPT-4o-mini</strong></th>
+                      <th data-js-sort-colNum="5"><strong>Qwen2-VL</strong></th>
+                      <th data-js-sort-colNum="6"><strong>LLaVA-OneVision</strong></th>
+                      <th data-js-sort-colNum="7"><strong>LLaVA-Next</strong></th>
+                      <th data-js-sort-colNum="8"><strong>LLaVA-1.5</strong></th>
+                      <th data-js-sort-colNum="9"><strong>CogVLM2</strong></th>
+                      <th data-js-sort-colNum="10"><strong>InternLM-XComposer-2.5</strong></th>
+                      <th data-js-sort-colNum="11"><strong>InternVL2</strong></th>
+                      <th data-js-sort-colNum="12"><strong>GeoChat</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- XLRS-Bench-EN 部分 -->
+                    <tr>
+                      <td>1</td>
+                      <!-- Benchmark 单元格跨两行 -->
+                      <td rowspan="1">XLRS-Bench-EN</td>
+                      <td>Acc@0.5</td>
+                      <td><strong>0.46</strong></td>
+                      <td>0.09</td>
+                      <td>0.15</td>
+                      <td>0.16</td>
+                      <td>0.18</td>
+                      <td>0.09</td>
+                      <td>0.01</td>
+                      <td>0.02</td>
+                      <td>0.33</td>
+                      <td>0.14</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td rowspan="1">XLRS-Bench-EN</td>
+                      <td>Acc@0.7</td>
+                      <td>0.05</td>
+                      <td>0.03</td>
+                      <td>0.03</td>
+                      <td>0.00</td>
+                      <td>0.04</td>
+                      <td>0.00</td>
+                      <td>0.00</td>
+                      <td>0.01</td>
+                      <td><strong>0.12</strong></td>
+                      <td>0.01</td>
+                    </tr>
+                    <!-- XLRS-Bench-ZH 部分 -->
+                    <tr>
+                      <td>3</td>
+                      <td rowspan="1">XLRS-Bench-ZH</td>
+                      <td>Acc@0.5</td>
+                      <td><strong>0.45</strong></td>
+                      <td>0.21</td>
+                      <td>0.14</td>
+                      <td>0.13</td>
+                      <td>0.07</td>
+                      <td>0.12</td>
+                      <td>0.03</td>
+                      <td>0.06</td>
+                      <td>0.19</td>
+                      <td>0.14</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td rowspan="1">XLRS-Bench-ZH</td>
+                      <td>Acc@0.7</td>
+                      <td>0.03</td>
+                      <td>0.03</td>
+                      <td>0.01</td>
+                      <td>0.01</td>
+                      <td>0.02</td>
+                      <td>0.02</td>
+                      <td>0.00</td>
+                      <td>0.00</td>
+                      <td><strong>0.06</strong></td>
+                      <td>0.01</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                
+      
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 mathvista_other">
+    <span class="mathvista_other" style="vertical-align: middle">Benchmark</span>
+  </h1>
+  </div>
+</section>
+            
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Data Example</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: center;", class="mt-3">
+              <strong>All data are freshly collected and human-annotated, with superior resolution, task complexity, and real-world utility.</strong>
+            </p>
+            <div class="box m-5">
+              <!-- <div TODO: more pic> -->
+              <div class="content has-text-centered" >
+                <img src="static/images/data_example.png" alt="teaser_tasks" width="100%"/>
+                <p style="text-align: center;", class="mt-3">
+                  <strong>Example of XLRS-Bench in English</strong>. XLRS-Bench focuses on large-size ultra-high-resolution remote sensing imagery, integrating over 10 multimodal perception and reasoning tasks within the same image.
+                </p>
+              </div>
+            </div>
+          </div> 
+
+        </div>
+      </div>
+    </div>
+
+        
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3" style="margin-top: 30px;">Benchmark Statistics</h2>
+            
+          <div class="box m-5">
+            <div id="container-object" style="place-items: center; height: 60vh;">
+              <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+              <script type="text/javascript" src="static/js/bingtu-object.js"></script>
+            </div>
+            <br>
+            <img src="static/images/characteristics.png" alt="" width="50%"/>
+            <p style="text-align: center; margin-top:3%;margin-left: auto; margin-right: auto; width: 80%;"> 
+              <strong>Task Categories</strong>: Our benchmark spans 10 level-2 tasks and 16 level-3 sub-tasks, including 1,400 high-resolution images and 45,942 annotations.
+            </p>
+          
+        </div>
+        
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="columns is-centered">
+    <div class="column">
+      <div class="content has-text-centered">
+        <h2 class="title is-3">Benchmark Comparison</h2>
+
+        <div class="box m-5" >
+          <div class="content has-text-centered">
+            <img src="static/images/comparison.png" alt="data-composition" style="max-width: 50%;"/>
+            <p style="text-align: center; margin-left: auto; margin-top:1%;margin-right: auto; width: 80%;" >
+              <!-- 引入 MathJax 库 -->
+              <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+              <strong>Comparison of XLRS-Bench with other benchmarks</strong>:<span style="color: forestgreen;">
+                <i class="fas fa-check-circle"></i>
+              </span>,
+              <span style="color: #808080;">  <!-- ashgrey 可自行调整颜色 -->
+                <i class="fas fa-times-circle"></i>
+              </span> and
+              <span style="position: relative; display: inline-block; color: darkorange; line-height: 1; height: 1em; width: 1em; vertical-align: middle;">
+                <i class="fas fa-check" style="position: absolute; top: 0; left: 0;"></i>
+                <i class="fas fa-times" style="position: absolute; top: 0; left: 0; transform: translate(0.3em, 0);"></i>
+              </span>&nbsp;separately represent the annotations
+              are machine generated, manually written and semi-automated, i.e., machine generation followed by human verification.<br/>
+            </p>
+          </div>
+        </div>
+
+      </div>
+  </div>
+  </div>
+
+
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other">Experiment Results</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="columns is-centered m-6">
+      <div class="column is-full has-text-centered content">
+
+        <h2 class="title is-3">Experimental Results on L3 Sub-tasks</h2>
+        <div class="box m-5">
+          
+          <div id="results-carousel" class="carousel results-carousel">  
+          
+            <div class="content has-text-centered image-wrapper">
+              <img src="static/images/perception.png" alt="" width="80%"/>
+              <p style="margin-bottom: 30px;">(1) Experimental results on perception tasks. “OC”, “RC”, “OLUC”, “RLUC”, “OSR”,“OCC”,“OCL” and
+                “OMS” each indicate a specific task domain: Overall counting, Regional Counting, Overall Land Use
+                classification, Regional Land Use Classification, Object Spatial Relationship, Object Classification,
+                Object Color and Object Motion State.</p>
+            </div>
+          
+            <div class="content has-text-centered image-wrapper">
+              <img src="static/images/reasoning.png" alt="" width="80%"/>
+              <p style="margin-bottom: 30px;">(2) Experimental results on reasoning tasks. “RP”, “AD”, “ECR”, “CCR” and “RCCD” each
+                indicate a specific task domain: Route Planning, Anomaly Detection, Environmental Conditional
+                Reasoning, Counting with Complex Reasoning and Regional Counting with Change Detection.</p>
+            </div>
+
+            <div class="content has-text-centered image-wrapper">
+              <img src="static/images/grounding.png" alt="" width="90%"/>
+              <p style="margin-bottom: 30px;">(3) Experimental results on visual grounding tasks.</p>
+            </div>
+
+
+          </div>
+
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+</section>
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <pre><code>
+      @article{wang2025xlrsbench,
+        title={XLRS-Bench: Could Your Multimodal LLMs Understand Extremely Large Ultra-High-Resolution Remote Sensing Imagery?},
+        author={Wang, Fengxiang and Wang, Hongzhen and Guo, Zonghao and Wang, Di and Wang, Yulin and Chen, Mingshuo and Ma, Qiang and Lan, Long and Yang, Wenjing and Zhang, Jing and others},
+        journal={arXiv preprint arXiv:25xx.xxxxx},
+        year={2025}
+      }      
+</code></pre>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container" style="width: 60%;">
+  <style>
+      pre {
+        background-color: #f4f4f4;
+        padding: 5px; /* 调整padding为5px */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow-x: auto; /* 允许水平滚动 */
+    }
+    code {
+        font-family: Consolas, "Courier New", monospace;
+        color: #d63384; /* 代码文本颜色 */
+    }
+  </style>
+
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            This website is adapted from <a href="https://mme-realworld.github.io/">MME-RealWorld</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+</footer>
+
+</body>
+</html>
+
