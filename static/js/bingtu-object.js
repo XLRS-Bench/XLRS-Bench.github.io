@@ -7,102 +7,199 @@ var app = {};
 
 var option;
 
+// var data = [
+//   {
+//     name: 'Perception',
+//     itemStyle: { color: '#b14d57' },
+//     children: [
+//       {
+//         name: 'Counting',
+//         itemStyle: { color: '#c78936' },
+//         children: [
+//           { name: 'OC', value: 1, itemStyle: { color: '#e5762e' } },
+//           { name: 'RC', value: 1, itemStyle: { color: '#dd4c51' } }
+//         ]
+//       },
+//       {
+//         name: 'Scene Classification',
+//         itemStyle: { color: '#8c292c' },
+//         children: [
+//           { name: 'OLUC', value: 1, itemStyle: { color: '#a16c5a' } },
+//           { name: 'RLUC', value: 1, itemStyle: { color: '#E5CCCC' } }
+//         ]
+//       },
+//       {
+//         name: 'Object Spatial Relationship',
+//         itemStyle: { color: '#E0C0C0' },
+//         children: [
+//           { name: 'OSR', value: 1, itemStyle: { color: '#dd4c51' } }
+//         ]
+//       },
+//       {
+//         name: 'Object Properties',
+//         itemStyle: { color: '#e65832' },
+//         children: [
+//           { name: 'OCC', value: 1, itemStyle: { color: '#d45a59' } },
+//           { name: 'OCL', value: 1, itemStyle: { color: '#ae341f' } },
+//           { name: 'OMS', value: 1, itemStyle: { color: '#E5E5CC' } }
+//         ]
+//       },
+//       {
+//         name: 'Image Captioning',
+//         itemStyle: { color: '#E0E0C0' },
+//         children: [
+//           { name: 'Detailed', value: 1, itemStyle: { color: '#CCCC99' } }
+//         ]
+//       },
+//       {
+//         name: 'Visual Grounding',
+//         itemStyle: { color: '#C0C080' },
+//         children: [
+//           { name: 'Fine-grained', value: 1, itemStyle: { color: '#B2B266' } }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     name: 'Reasoning',
+//     itemStyle: { color: '#a87b64' },
+//     children: [
+//       {
+//         name: 'Visual Grounding',
+//         itemStyle: { color: '#c78869' },
+//         children: [
+//           { name: 'Condition-based', value: 1, itemStyle: { color: '#d4ad12' } }
+//         ]
+//       },
+//       {
+//         name: 'Route Planning',
+//         itemStyle: { color: '#9d5433' },
+//         children: [
+//           { name: 'RP', value: 1, itemStyle: { color: '#c89f83' } }
+//         ]
+//       },
+//       {
+//         name: 'Anomaly Reasoning',
+//         itemStyle: { color: '#bb764c' },
+//         children: [
+//           { name: 'AD', value: 1, itemStyle: { color: '#692a19' } }
+//         ]
+//       },
+//       {
+//         name: 'Complex Reasoning',
+//         itemStyle: { color: '#470604' },
+//         children: [
+//           { name: 'ECR', value: 1, itemStyle: { color: '#CCCCE5' } },
+//           { name: 'CCR', value: 1, itemStyle: { color: '#E0E0FF' } }
+//         ]
+//       },
+//       {
+//         name: 'Spatiotemporal Reasoning',
+//         itemStyle: { color: '#CCCCFF' },
+//         children: [
+//           { name: 'RCCD', value: 1, itemStyle: { color: '#8080FF' } }
+//         ]
+//       }
+//     ]
+//   }
+// ];
 var data = [
   {
     name: 'Perception',
-    itemStyle: { color: '#b14d57' },
+    itemStyle: { color: '#4DB6AC' }, // 顶层：柔和青绿色
     children: [
       {
         name: 'Counting',
-        itemStyle: { color: '#c78936' },
+        itemStyle: { color: '#81D4FA' }, // L2 浅蓝色
         children: [
-          { name: 'OC', value: 1, itemStyle: { color: '#e5762e' } },
-          { name: 'RC', value: 1, itemStyle: { color: '#dd4c51' } }
+          { name: 'Overall Counting', value: 1, itemStyle: { color: '#4FC3F7' } }, // L3 渐变更明显
+          { name: 'Regional Counting', value: 1, itemStyle: { color: '#29B6F6' } }
         ]
       },
       {
         name: 'Scene Classification',
-        itemStyle: { color: '#8c292c' },
+        itemStyle: { color: '#CE93D8' }, // L2 薰衣草紫
         children: [
-          { name: 'OLUC', value: 1, itemStyle: { color: '#a16c5a' } },
-          { name: 'RLUC', value: 1, itemStyle: { color: '#E5CCCC' } }
+          { name: 'Overall Land Use Classification', value: 1, itemStyle: { color: '#BA68C8' } },
+          { name: 'Regional Land Use Classification', value: 1, itemStyle: { color: '#AB47BC' } }
         ]
       },
       {
         name: 'Object Spatial Relationship',
-        itemStyle: { color: '#E0C0C0' },
+        itemStyle: { color: '#A5D6A7' }, // L2 浅绿色
         children: [
-          { name: 'OSR', value: 1, itemStyle: { color: '#dd4c51' } }
+          { name: 'Oobject Spatial Relationship', value: 1, itemStyle: { color: '#66BB6A' } }
         ]
       },
       {
         name: 'Object Properties',
-        itemStyle: { color: '#e65832' },
+        itemStyle: { color: '#FFF59D' }, // L2 暖黄色
         children: [
-          { name: 'OCC', value: 1, itemStyle: { color: '#d45a59' } },
-          { name: 'OCL', value: 1, itemStyle: { color: '#ae341f' } },
-          { name: 'OMS', value: 1, itemStyle: { color: '#E5E5CC' } }
+          { name: 'Oobject Classification', value: 1, itemStyle: { color: '#FFEE58' } },
+          { name: 'Oobject Color', value: 1, itemStyle: { color: '#FFEB3B' } },
+          { name: 'Oobject Motion State', value: 1, itemStyle: { color: '#FDD835' } }
         ]
       },
       {
         name: 'Image Captioning',
-        itemStyle: { color: '#E0E0C0' },
+        itemStyle: { color: '#FFAB91' }, // L2 珊瑚色
         children: [
-          { name: 'Detailed', value: 1, itemStyle: { color: '#CCCC99' } }
+          { name: 'Detailed Image Captioning', value: 1, itemStyle: { color: '#FF8A65' } }
         ]
       },
       {
         name: 'Visual Grounding',
-        itemStyle: { color: '#C0C080' },
+        itemStyle: { color: '#B0BEC5' }, // L2 Visual Grounding 统一颜色
         children: [
-          { name: 'Fine-grained', value: 1, itemStyle: { color: '#B2B266' } }
+          { name: 'Fine-grained Visual Grounding', value: 1, itemStyle: { color: '#8AA0A8' } } // L3 与 Condition-based 相近
         ]
       }
     ]
   },
   {
     name: 'Reasoning',
-    itemStyle: { color: '#a87b64' },
+    itemStyle: { color: '#FF8A65' }, // 顶层：温暖橙色
     children: [
       {
         name: 'Visual Grounding',
-        itemStyle: { color: '#c78869' },
+        itemStyle: { color: '#B0BEC5' }, // L2 Visual Grounding 统一颜色
         children: [
-          { name: 'Condition-based', value: 1, itemStyle: { color: '#d4ad12' } }
+          { name: 'Condition-based Visual Grounding', value: 1, itemStyle: { color: '#90A4AE' } } // L3 与 Fine-grained 相近
         ]
       },
       {
         name: 'Route Planning',
-        itemStyle: { color: '#9d5433' },
+        itemStyle: { color: '#80CBC4' }, // L2 浅青色
         children: [
-          { name: 'RP', value: 1, itemStyle: { color: '#c89f83' } }
+          { name: 'Route Planning', value: 1, itemStyle: { color: '#4DB6AC' } }
         ]
       },
       {
         name: 'Anomaly Reasoning',
-        itemStyle: { color: '#bb764c' },
+        itemStyle: { color: '#EF9A9A' }, // L2 浅红色
         children: [
-          { name: 'AD', value: 1, itemStyle: { color: '#692a19' } }
+          { name: 'Anomaly Detection and Interpretation', value: 1, itemStyle: { color: '#E57373' } }
         ]
       },
       {
         name: 'Complex Reasoning',
-        itemStyle: { color: '#470604' },
+        itemStyle: { color: '#CE93D8' }, // L2 浅紫色
         children: [
-          { name: 'ECR', value: 1, itemStyle: { color: '#CCCCE5' } },
-          { name: 'CCR', value: 1, itemStyle: { color: '#E0E0FF' } }
+          { name: 'Environmental Condition Reasoning', value: 1, itemStyle: { color: '#AB47BC' } },
+          { name: 'Counting with Complex Reasoning', value: 1, itemStyle: { color: '#9C27B0' } }
         ]
       },
       {
         name: 'Spatiotemporal Reasoning',
-        itemStyle: { color: '#CCCCFF' },
+        itemStyle: { color: '#90CAF9' }, // L2 浅蓝色
         children: [
-          { name: 'RCCD', value: 1, itemStyle: { color: '#8080FF' } }
+          { name: 'Regional Counting with Change Detection', value: 1, itemStyle: { color: '#64B5F6' } }
         ]
       }
     ]
   }
 ];
+
 
 option = {
   textStyle: {
@@ -152,7 +249,7 @@ option = {
       {},
       {
         r0: '5%',
-        r: '25%',
+        r: '20%',
         itemStyle: {
           borderWidth: 2,
           borderRadius: 10,
@@ -167,11 +264,11 @@ option = {
         }
       },
       {
-        r0: '25%',
-        r: '70%',
+        r0: '20%',
+        r: '60%',
         label: {
           align: 'center',
-          fontSize: 11,
+          fontSize: 12,
           fontWeight: "bold"
         },
         itemStyle: {
@@ -181,12 +278,12 @@ option = {
         }
       },
       {
-        r0: '70%',
+        r0: '60%',
         r: '100%',
         label: {
           position: 'inside',
           padding: 0,
-          fontSize: 10,
+          fontSize: 11,
           silent: true,
           fontWeight: "bold"
         },

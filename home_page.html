@@ -119,8 +119,6 @@
             <span class="author-block">Maosong Sun<sup style="color:#9400D3">2</sup></span>
 
 
-            <br><span class="author-block", style="font-size:25px;text-shadow: 2px 2px 4px rgba(67, 113, 232, 0.5)"><a href="https://github.com/nanocm/XLRS">XLRS-Bench Team</a></span></br>
-
         </div>
 
           <div class="is-size-5 publication-authors">
@@ -214,6 +212,36 @@
       </div>
     </div>
     <!--/ Abstract. -->
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Benchmark Comparison</h2>
+  
+          <div class="box m-5" >
+            <div class="content has-text-centered">
+              <img src="static/images/comparison.jpg" alt="data-composition" style="max-width: 80%;"/>
+              <p style="text-align: center; margin-left: auto; margin-top:1%;margin-right: auto; width: 80%;" >
+                <!-- 引入 MathJax 库 -->
+                <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  
+                <strong>Comparison of XLRS-Bench with other benchmarks</strong>:<span style="color: forestgreen;">
+                  <i class="fas fa-check-circle"></i>
+                </span>,
+                <span style="color: #808080;">  <!-- ashgrey 可自行调整颜色 -->
+                  <i class="fas fa-times-circle"></i>
+                </span> and
+                <span style="position: relative; display: inline-block; color: darkorange; line-height: 1; height: 1em; width: 1em; vertical-align: middle;">
+                  <i class="fas fa-check" style="position: absolute; top: 0; left: 0;"></i>
+                  <i class="fas fa-times" style="position: absolute; top: 0; left: 0; transform: translate(0.3em, 0);"></i>
+                </span>&nbsp;separately represent the annotations
+                are machine generated, manually written and semi-automated, i.e., machine generation followed by human verification.<br/>
+              </p>
+            </div>
+          </div>
+  
+        </div>
+    </div>
+    </div>
 </div>
 </section>
 
@@ -231,6 +259,21 @@
   }
 </script>
 <!-- <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script> -->
+
+<a href="#leaderboard" style="
+  position: fixed;
+  right: 5px;
+  bottom: 40px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 1000;
+">
+  Leaderboard
+</a>
 
 <section class="section">
   <div class="container">
@@ -896,13 +939,15 @@
         <div class="content has-text-centered">
           <h2 class="title is-3" style="margin-top: 30px;">Benchmark Statistics</h2>
             
-          <div class="box m-5">
-            <div id="container-object" style="place-items: center; height: 60vh;">
+          <!-- <div class="box m-5">
+            <div id="container-object" style="place-items: center; height: 90vh;">
               <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
               <script type="text/javascript" src="static/js/bingtu-object.js"></script>
             </div>
-            <br>
-            <img src="static/images/characteristics.jpg" alt="" width="50%"/>
+            <br> -->
+
+            <img src="static/images/chart.jpg" alt="" width="40%"/>
+            <img src="static/images/characteristics.jpg" alt="" width="70%"/>
             <p style="text-align: center; margin-top:3%;margin-left: auto; margin-right: auto; width: 80%;"> 
               <strong>Task Categories</strong>: Our benchmark spans 10 level-2 tasks and 16 level-3 sub-tasks, including 1,400 high-resolution images and 45,942 annotations.
             </p>
@@ -914,36 +959,7 @@
 
     
   </div>
-  <div class="columns is-centered">
-    <div class="column">
-      <div class="content has-text-centered">
-        <h2 class="title is-3">Benchmark Comparison</h2>
 
-        <div class="box m-5" >
-          <div class="content has-text-centered">
-            <img src="static/images/comparison.jpg" alt="data-composition" style="max-width: 50%;"/>
-            <p style="text-align: center; margin-left: auto; margin-top:1%;margin-right: auto; width: 80%;" >
-              <!-- 引入 MathJax 库 -->
-              <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-
-              <strong>Comparison of XLRS-Bench with other benchmarks</strong>:<span style="color: forestgreen;">
-                <i class="fas fa-check-circle"></i>
-              </span>,
-              <span style="color: #808080;">  <!-- ashgrey 可自行调整颜色 -->
-                <i class="fas fa-times-circle"></i>
-              </span> and
-              <span style="position: relative; display: inline-block; color: darkorange; line-height: 1; height: 1em; width: 1em; vertical-align: middle;">
-                <i class="fas fa-check" style="position: absolute; top: 0; left: 0;"></i>
-                <i class="fas fa-times" style="position: absolute; top: 0; left: 0; transform: translate(0.3em, 0);"></i>
-              </span>&nbsp;separately represent the annotations
-              are machine generated, manually written and semi-automated, i.e., machine generation followed by human verification.<br/>
-            </p>
-          </div>
-        </div>
-
-      </div>
-  </div>
-  </div>
 
 
 </section>
@@ -1010,10 +1026,10 @@
     <pre><code>
       @article{wang2025xlrsbench,
         title={XLRS-Bench: Could Your Multimodal LLMs Understand Extremely Large Ultra-High-Resolution Remote Sensing Imagery?},
-        author={Wang, Fengxiang and Wang, Hongzhen and Guo, Zonghao and Wang, Di and Wang, Yulin and Chen, Mingshuo and Ma, Qiang and Lan, Long and Yang, Wenjing and Zhang, Jing and others},
+        author={Wang, Fengxiang and Wang, Hongzhen and Chen, Mingshuo and Wang, Di and Wang, Yulin and Guo, Zonghao and Ma, Qiang and Lan, Long and Yang, Wenjing and Zhang, Jing and others},
         journal={arXiv preprint arXiv:25xx.xxxxx},
         year={2025}
-      }      
+      }
 </code></pre>
   </div>
 </section>
