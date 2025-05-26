@@ -133,7 +133,7 @@
                       <!-- <i class="far fa-huggingface"></i> -->
                       <p style="font-size:18px">🤗</p>
                   </span>
-                  <span>Dataset</span>
+                  <span>XLRS-Bench-lite</span>
                 </a>
               </span> 
               <!-- Leaderboard Link. -->
@@ -250,13 +250,36 @@
     
     <div class="columns is-centered">
       <div class="column is-full has-text-centered content">
-
         <h2 class="title is-3" id="leaderboard" style="margin-top: -5%;">Leaderboard</h2>
+
         <div class="content">
           <p class="mt-3">Models are ranked according to their average performance on perception and reasoning tasks, from highest to lowest. 
+            <strong>"Counting", "Scene Classification", and so on </strong> each indicate a specific L2 sub-task respectively.
+            <strong>“Avg”</strong> indicate the weighted average accuracy across all L2 sub-tasks or macro average across all L3 tasks. We will add both metrics soon. By default, this leaderboard is sorted by results with <strong>Avg.</strong>. To view other sorted results, please click on the corresponding cell.
+          </p>
+          <p class="mt-3"> Results on <strong>XLRS-Bench-lite</strong>.</p>
+          
+          <div class="content has-text-centered image-wrapper">
+            <img src="static/images/XLRS-Bench-lite.jpg" alt="" width="90%"/>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="container">
+    
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+
+        <div class="content">
+          <!-- <p class="mt-3">Models are ranked according to their average performance on perception and reasoning tasks, from highest to lowest. 
             <strong>"Counting", "Scene Classification", and so on </strong> each indicate a specific L2 sub-task respectively. 
             <strong>“Avg”</strong> indicate the weighted average accuracy across all L2 sub-tasks in each domain. By default, this leaderboard is sorted by results with <strong>Overall</strong>. To view other sorted results, please click on the corresponding cell.
-          </p>
+          </p> -->
           <p class="mt-3"> Results on <strong>English VQA</strong> benchmark.</p>
           <table class="js-sort-table results "  style="margin-left: auto; margin-right: auto;">
             <thead>
